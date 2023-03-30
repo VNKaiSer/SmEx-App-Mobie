@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:icon="@drawable/baseline_home_24"
+        android:title="Tổng quan" />
+    <item
+        android:icon="@drawable/baseline_analytics_24"
+        android:title="Thống kê" />
+    <item
+        android:icon="@drawable/list_check_solid"
+        android:title="Kế hoạch" />
+    <item
+        android:icon="@drawable/baseline_settings_suggest_24"
+        android:title="Cài đặt" />
+</menu>

@@ -2,14 +2,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:innerRadiusRatio="3.5"
     android:shape="ring"
-    android:thickness="22dp"
+    android:thickness="30dp"
 
     android:useLevel="false">
 
     <solid android:color="#FF9800"/>
 
-    <size android:width="100dp"
-            android:height="100dp" />
+    <size android:width="85dp"
+            android:height="85dp" />
 
 
 
