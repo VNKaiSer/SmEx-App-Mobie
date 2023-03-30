@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#EFEFEF"
     android:padding="20dp">
 
@@ -35,6 +35,7 @@
         android:textColor="#0189ff" />
 
     <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/infoImg"
         android:layout_width="wrap_content"
         android:layout_height="120dp"
         android:layout_alignParentTop="true"
@@ -118,8 +119,8 @@
             android:background="@drawable/shape_full"
             android:gravity="center_horizontal"
             android:padding="4dp"
-            android:textColor="#0189ff"
             android:text="Basic"
+            android:textColor="#0189ff"
             android:textSize="11dp" />
 
         <TextView
@@ -141,5 +142,183 @@
             android:src="@drawable/baseline_arrow_forward_ios_24" />
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/infoImg"
+        android:layout_marginTop="10dp"
+        android:text="Quản lý"
+        android:textColor="#8E8E8E"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <TableLayout
+        android:id="@+id/manager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/infoImg"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/shape"
+        android:padding="10dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            >
+            <LinearLayout
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/shape_manager"
+                    android:padding="10dp"
+                    android:src="@drawable/baseline_supervised_user_circle_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:text="Gia đình của tôi" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/shape_manager"
+                    android:padding="10dp"
+                    android:src="@drawable/baseline_supervised_user_circle_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:text="Danh mục" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/shape_manager"
+                    android:padding="10dp"
+                    android:src="@drawable/baseline_supervised_user_circle_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:text="Sự kiện" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/shape_manager"
+                    android:padding="10dp"
+                    android:src="@drawable/baseline_supervised_user_circle_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:text="Ghi chép định kỳ" />
+            </LinearLayout>
+
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/shape_manager"
+                    android:padding="10dp"
+                    android:src="@drawable/baseline_supervised_user_circle_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:text="Gia đình của tôi" />
+            </LinearLayout>
+
+        </TableRow>
+
+    </TableLayout>
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ứng dụng"
+        android:layout_below="@id/manager"
+        android:textColor="#8E8E8E"
+        android:textSize="20dp"
+        android:textStyle="bold"
+
+        />
+
+    <ListView
+        android:layout_marginTop="40dp"
+        android:background="@drawable/shape"
+        android:layout_below="@id/manager"
+        android:id="@+id/listApp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>
