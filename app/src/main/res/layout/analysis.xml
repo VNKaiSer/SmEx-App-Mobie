@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/bieuDo"
         android:layout_marginTop="6dp"
-        android:text="< THÁNG 4/2023"
+        android:text="THÁNG 4/2023"
         android:textStyle="bold"
         android:textSize="18dp"
         android:layout_marginLeft="5dp"/>
@@ -109,8 +109,7 @@
         android:background="@drawable/wallet_svgrepo_com"
         android:layout_above="@+id/btnThemKhoanChi"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="100dp"
-        />
+        android:layout_marginBottom="100dp" />
 
 
 </RelativeLayout>
