@@ -11,9 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmExAppAndroid"
         tools:targetApi="31">
-
         <activity
-            android:name=".more"
+            android:name=".Spending"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,13 +24,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".plan"
-            android:exported="false">
-
-        </activity>
-        <activity
-            android:name=".HomeLayout"
-            android:exported="false"></activity>
+            android:name=".PlanFrg"
+            android:exported="false" />
     </application>
 
 </manifest>

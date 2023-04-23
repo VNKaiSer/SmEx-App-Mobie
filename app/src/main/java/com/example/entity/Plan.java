@@ -2,13 +2,13 @@ package com.example.entity;
 
 public class Plan {
     private String title;
-    private double price;
+    private int price;
 
     public Plan() {
 
     }
 
-    public Plan(String title, double price) {
+    public Plan(String title, int price) {
         this.title = title;
         this.price = price;
     }
@@ -21,11 +21,11 @@ public class Plan {
         this.title = title;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/changePlan"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_marginBottom="5dp"
+    android:padding="16dp"
     android:background="@drawable/shape"
-    android:padding="5dp">
-
+    >
 
     <TextView
         android:id="@+id/titlePlan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textColor="#0269BA"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/pricePlan"
@@ -21,16 +24,18 @@
         android:layout_alignParentRight="true"
         android:layout_gravity="end"
         android:layout_weight="1"
-        android:text="long" />
+        android:text="long"
+        android:textColor="#0269BA"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <SeekBar
         android:id="@+id/seekbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/pricePlan"
-        android:layout_marginTop="0dp"
-        android:indeterminate="false"
-        android:max="20"
+        android:layout_marginTop="10dp"
+        android:max="500000"
         android:progress="0"
         android:progressDrawable="@drawable/custom_seekbar"
         android:thumb="@drawable/thumb" />

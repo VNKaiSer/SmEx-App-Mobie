@@ -3,7 +3,7 @@
     <item android:gravity="center_vertical">
         <shape android:shape="rectangle">
             <solid android:color="#Ebf6f7" />
-            <size android:height="30dp" />
+            <size android:height="20dp" />
             <corners android:radius="20dp" />
         </shape>
     </item>
@@ -12,12 +12,10 @@
 
         <scale android:scaleWidth="100%">
             <selector>
-                <item
-                    android:drawable="@color/teal_700"
-                    android:state_enabled="false" />
+                <item android:drawable="@android:color/holo_blue_bright" />
                 <item>
                     <shape android:shape="rectangle">
-                        <solid android:color="#Ebf6f7" />
+                        <solid android:color="#35D7E6" />
                         <size android:height="30dp" />
                         <corners android:radius="20dp" />
                     </shape>

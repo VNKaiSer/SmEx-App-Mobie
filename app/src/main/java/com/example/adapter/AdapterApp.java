@@ -1,36 +1,36 @@
-package com.example.smex_app_android;
+package com.example.adapter;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.LightingColorFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.example.entity.App;
 import com.example.entity.Plan;
+import com.example.smex_app_android.R;
+import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.List;
 
-public class AdapterPlan  extends BaseAdapter {
+public class AdapterApp extends BaseAdapter {
 
     private Context context;
     private  int layout;
-    private List<Plan> listPlan;
+    private List<App> listApp;
 
-    public AdapterPlan(Context context, int layout, List<Plan> listPlan) {
+    public AdapterApp(Context context, int layout, List<App> listApp) {
         this.context = context;
         this.layout = layout;
-        this.listPlan = listPlan;
+        this.listApp = listApp;
     }
 
     @Override
     public int getCount() {
-        return listPlan.size();
+        return listApp.size();
     }
 
     @Override
@@ -49,16 +49,16 @@ public class AdapterPlan  extends BaseAdapter {
 
         view = inflater.inflate(layout, null);
 
-        Plan plan = listPlan.get(i);
+        App app = listApp.get(i);
 
-        TextView title = view.findViewById(R.id.titlePlan);
-        TextView price = view.findViewById(R.id.pricePlan);
-        SeekBar seekBar = view.findViewById(R.id.seekbar);
+        TextView title = view.findViewById(R.id.textApp);
+        ImageView icon = view.findViewById(R.id.iconApp);
+        String iconName = app.getIcon();
+        int resId = context.getResources().getIdentifier(iconName, "drawable", context.getPackageName());
 
+        title.setText(app.getText());
+        icon.setImageResource(resId);
 
-        title.setText(plan.getTitle());
-        price.setText(plan.getPrice()+"");
-        seekBar.setEnabled(false);
 
         return view;
     }
