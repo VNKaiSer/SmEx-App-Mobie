@@ -23,7 +23,7 @@ public class HomeLayout extends AppCompatActivity {
         getSupportActionBar().hide();
         // Hide the status bar
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+        setContentView(R.layout.home);
         // Hide the navigation bar
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
@@ -35,7 +35,6 @@ public class HomeLayout extends AppCompatActivity {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date date = dateFormat.parse(dateString);
-            //Toast.makeText(this, dateFormat.format(date)+"", Toast.LENGTH_SHORT).show();
             Toast.makeText(this, thuNhapRepository.getAll()+"", Toast.LENGTH_SHORT).show();
         } catch (ParseException e) {
             throw new RuntimeException(e);

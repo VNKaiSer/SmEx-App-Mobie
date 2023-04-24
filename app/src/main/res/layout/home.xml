@@ -136,15 +136,6 @@
 
         />
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/bottom_menu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/white"
-        app:menu="@menu/menu_bottom"
-        app:itemTextColor="@drawable/slect_menu_bottom"
-        />
 
     <Button
         android:id="@+id/btnThemKhoanChi"
@@ -154,7 +145,7 @@
         android:text="Thêm khoản chi"
         android:textColor="@color/white"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/bottom_menu"
+        android:layout_above="@+id/topShowMoney"
         android:layout_marginBottom="100dp"
         android:background="@drawable/buton_radius"
         android:paddingLeft="20dp"

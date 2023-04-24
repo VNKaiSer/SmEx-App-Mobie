@@ -8,7 +8,7 @@ public class DatabaseRepository {
     private SQLiteDatabase sqLiteDatabase;
 
     DatabaseRepository(){
-        String path ="/data/data/com.example.smex_app_android/files/qlct.db";
+        String path ="/data/data/com.example.smex_app_android/files/DatabaseApp.db";
         sqLiteDatabase = SQLiteDatabase.openDatabase(path, null , SQLiteDatabase.CREATE_IF_NECESSARY);
     }
 
