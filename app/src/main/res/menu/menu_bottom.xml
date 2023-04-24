@@ -2,15 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/home"
         android:icon="@drawable/baseline_home_24"
         android:title="Tổng quan" />
     <item
+        android:id="@+id/analysis"
         android:icon="@drawable/baseline_analytics_24"
         android:title="Thống kê" />
     <item
+        android:id="@+id/plan"
         android:icon="@drawable/list_check_solid"
         android:title="Kế hoạch" />
     <item
+        android:id="@+id/setting"
         android:icon="@drawable/baseline_settings_suggest_24"
         android:title="Cài đặt" />
 </menu>
