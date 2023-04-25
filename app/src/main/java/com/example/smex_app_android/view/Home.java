@@ -1,4 +1,4 @@
-package com.example.smex_app_android;
+package com.example.smex_app_android.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,16 +14,11 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.adapter.CustomArrayAdapter;
+import com.example.smex_app_android.R;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 
 public class Home extends Fragment {

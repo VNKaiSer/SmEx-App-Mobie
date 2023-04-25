@@ -5,15 +5,22 @@ import java.util.Date;
 public class KhoanChi {
     private int maKhoanChi;
     private LoaiKhoanChi loaiKhoanChi;
-    private Date ngayChi;
+    private String ngayChi;
     private String moTa;
     private double soTien;
+
+    public KhoanChi(LoaiKhoanChi loaiKhoanChi, String ngayChi, String moTa, double soTien) {
+        this.loaiKhoanChi = loaiKhoanChi;
+        this.ngayChi = ngayChi;
+        this.moTa = moTa;
+        this.soTien = soTien;
+    }
 
     public KhoanChi() {
 
     }
 
-    public KhoanChi(int maKhoanChi, LoaiKhoanChi loaiKhoanChi, Date ngayChi, String moTa, double soTien) {
+    public KhoanChi(int maKhoanChi, LoaiKhoanChi loaiKhoanChi, String ngayChi, String moTa, double soTien) {
         this.maKhoanChi = maKhoanChi;
         this.loaiKhoanChi = loaiKhoanChi;
         this.ngayChi = ngayChi;
@@ -37,11 +44,11 @@ public class KhoanChi {
         this.loaiKhoanChi = loaiKhoanChi;
     }
 
-    public Date getNgayChi() {
+    public String getNgayChi() {
         return ngayChi;
     }
 
-    public void setNgayChi(Date ngayChi) {
+    public void setNgayChi(String ngayChi) {
         this.ngayChi = ngayChi;
     }
 

@@ -1,4 +1,4 @@
-package com.example.smex_app_android;
+package com.example.smex_app_android.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.adapter.AdapterPlan;
 import com.example.entity.Plan;
+import com.example.smex_app_android.R;
 
 import java.util.ArrayList;
 import java.util.List;

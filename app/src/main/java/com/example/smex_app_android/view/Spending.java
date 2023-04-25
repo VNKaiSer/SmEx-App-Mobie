@@ -1,14 +1,11 @@
-package com.example.smex_app_android;
+package com.example.smex_app_android.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -17,14 +14,22 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.adapter.ImageAdapter;
+import com.example.smex_app_android.R;
+import com.example.smex_app_android.model.KhoanChi;
+import com.example.smex_app_android.model.LoaiKhoanChi;
+import com.example.smex_app_android.service.CRUDService;
+import com.example.smex_app_android.service.KhoanChiService;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class Spending extends AppCompatActivity {
@@ -33,6 +38,10 @@ public class Spending extends AppCompatActivity {
     private Button btnTime, spen1, spen2, spen3, spen4, spen5, btnHuy;
     private TextView time;
     private EditText money;
+
+    private Button btnThem;
+
+    private EditText edtMoney;
 
     private int mYear, mMonth, mDay, mHour, mMinute;
 
@@ -104,6 +113,7 @@ public class Spending extends AppCompatActivity {
         spen4 = findViewById(R.id.spen4);
         spen5 = findViewById(R.id.spen5);
         money = findViewById(R.id.edtMoney);
+
         List<Button> btns = new ArrayList<>(
                 Arrays.asList(spen1, spen2, spen3, spen4, spen5)
         );
@@ -151,5 +161,103 @@ public class Spending extends AppCompatActivity {
             }
         });
 
+        btnThem = findViewById(R.id.btnThem);
+        edtMoney = findViewById(R.id.edtMoney);
+        btnThem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkInformation()){
+                    insertKhoanChi();
+                }
+            }
+        });
+
+
+
+    }
+
+    private void insertKhoanChi() {
+        try {
+            CRUDService<KhoanChi> service = new KhoanChiService();
+            String mota = ((EditText)findViewById(R.id.editTextTextMultiLine)).getText().toString();
+            String ngayChi = time.getText().toString();
+            Double soTien = Double.parseDouble(edtMoney.getText().toString());
+
+
+            KhoanChi khoanChi = new KhoanChi(LoaiKhoanChi.AN, ngayChi, mota, soTien);
+            service.insert(khoanChi);
+            System.out.println(service.get(1));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+
+        //
+    }
+
+    private boolean checkInformation() {
+        String money = edtMoney.getText().toString().trim();
+        // check so tien
+        if (money.equals("")){
+            Toast.makeText(this, "Số tiền không được để trống", Toast.LENGTH_SHORT).show();
+            edtMoney.requestFocus();
+            return false;
+        }
+
+        if (money.equals("0")){
+            Toast.makeText(this, "Số tiền phải lớn hơn không", Toast.LENGTH_SHORT).show();
+            edtMoney.requestFocus();
+            return false;
+        }
+
+        // check ngay
+        /**
+         * Ngày mặc định là ngày hiện tại, ngày thêm khoản thu thì không được là tương lai
+         */
+
+        if (time.getText().equals("")){
+            Toast.makeText(this, "Vui lòng chọn ngày của khoản chi", Toast.LENGTH_SHORT).show();
+            btnTime.requestFocus();
+            return false;
+        }
+
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = dateFormat.parse(time.getText().toString());
+            if (date.after(new Date())){
+                Toast.makeText(this, "Ngày chi không được sau ngày hiên tại", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }  catch (ParseException e) {
+            Toast.makeText(this, "Ngày không đúng định dạng", Toast.LENGTH_SHORT).show();
+            throw new RuntimeException(e);
+            //return  false;
+        }
+
+        Toast.makeText(this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+        View rootView = getWindow().getDecorView().findViewById(android.R.id.content);
+        Animation anim = AnimationUtils.loadAnimation(Spending.this, R.anim.slide_in_down);
+        rootView.startAnimation(anim);
+        anim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                // Display MainActivity when animation starts
+                Intent intent = new Intent(Spending.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                rootView.setVisibility(View.GONE); // Hide the view when animation is finished
+                finish();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        return true;
     }
 }
