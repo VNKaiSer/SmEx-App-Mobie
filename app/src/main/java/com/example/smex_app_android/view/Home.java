@@ -6,10 +6,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -62,11 +65,22 @@ public class Home extends Fragment {
         TextView txtMoney = view.findViewById(R.id.totalMoney);
         TextView txtUserName = view.findViewById(R.id.userName);
         TextView txtMoneyUsed = view.findViewById(R.id.moneyUsed);
-
+        ImageView imageView = view.findViewById(R.id.imgThemKhoanThu);
+        try {
+            if (khoanChiService.checkUsedMoneyThisDay()){
+                ListView viewKhoanChi = view.findViewById(R.id.viewKhoanChi);
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1,khoanChiService.getKhoanChiStringByDay());
+                viewKhoanChi.setAdapter(adapter);
+                viewKhoanChi.setVisibility(View.VISIBLE);
+                imageView.setVisibility(View.GONE);
+            }
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
         txtMoney.setText("$" + currentPrice);
         txtUserName.setText("Hi, "+user);
         try {
-            txtMoneyUsed.setText(khoanChiService.totalMoneyUsed()+"");
+            txtMoneyUsed.setText("$"+ khoanChiService.totalMoneyUsed());
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }

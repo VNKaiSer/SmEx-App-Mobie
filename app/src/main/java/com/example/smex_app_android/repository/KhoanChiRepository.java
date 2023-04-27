@@ -13,7 +13,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
@@ -84,13 +83,10 @@ public class KhoanChiRepository implements ICRUD<KhoanChi> {
                 );
             }
         }
-
-        System.out.println(totalMoney.get());
-
         return totalMoney.get();
     }
 
-    public boolean checkUserMoneyThisDay() throws ParseException {
+    public boolean checkUsedMoneyThisDay() throws ParseException {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             LocalDate currentDate = LocalDate.now();
             int monthC = currentDate.getMonthValue();
@@ -106,5 +102,34 @@ public class KhoanChiRepository implements ICRUD<KhoanChi> {
         }
         return false;
 
+    }
+
+    public ArrayList<String> getKhoanChiStringByDay() throws ParseException {
+        ArrayList<String> data = new ArrayList<>();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            LocalDate currentDate = LocalDate.now();
+            int monthC = currentDate.getMonthValue();
+            int yearC = currentDate.getYear();
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                AtomicInteger stt = new AtomicInteger(1);
+                getAll().forEach(
+                        s->{
+                            DateTimeFormatter formatter = null;
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+
+                                LocalDate date = LocalDate.parse(s.getNgayChi(), formatter);
+                                int month = date.getMonthValue();
+                                int year = date.getYear();
+                                if (month == monthC && year == yearC){
+                                    data.add((stt.getAndIncrement()) + " - " + s.getLoaiKhoanChi() +" - " + s.getSoTien() +" $");
+                                }
+                            }
+                        }
+                );
+            }
+        }
+        return data;
     }
 }
