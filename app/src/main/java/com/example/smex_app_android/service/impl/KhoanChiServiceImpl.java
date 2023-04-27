@@ -1,15 +1,16 @@
-package com.example.smex_app_android.service;
+package com.example.smex_app_android.service.impl;
 
 import com.example.smex_app_android.model.KhoanChi;
 import com.example.smex_app_android.repository.KhoanChiRepository;
+import com.example.smex_app_android.service.CRUDService;
 
 import java.text.ParseException;
 import java.util.List;
 
-public class KhoanChiService implements CRUDService<com.example.smex_app_android.model.KhoanChi> {
+public class KhoanChiServiceImpl implements CRUDService<KhoanChi> {
     private KhoanChiRepository khoanChiRepository;
 
-    public KhoanChiService(){
+    public KhoanChiServiceImpl(){
         khoanChiRepository = new KhoanChiRepository();
     }
 

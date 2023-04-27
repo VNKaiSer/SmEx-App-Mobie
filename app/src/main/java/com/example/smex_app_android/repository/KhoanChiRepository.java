@@ -23,7 +23,6 @@ public class KhoanChiRepository implements ICRUD<KhoanChi> {
     @Override
     public boolean insert(KhoanChi obj) {
         ContentValues cv = new ContentValues();
-        //cv.put("maKhoanChi", 1);
         cv.put("loaiKhoanChi", obj.getLoaiKhoanChi().toString());
         cv.put("ngayChi", obj.getNgayChi());
         cv.put("moTa", obj.getMoTa());

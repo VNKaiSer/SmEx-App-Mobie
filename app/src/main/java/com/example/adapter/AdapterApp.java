@@ -1,29 +1,16 @@
 package com.example.adapter;
 
-import com.example.smex_app_android.SettingGeneral;
-import com.example.smex_app_android.Spending;
-import com.google.android.material.imageview.ShapeableImageView;
-
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RoundRectShape;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.entity.App;
-import com.example.entity.Plan;
 import com.example.smex_app_android.R;
-import com.google.android.material.imageview.ShapeableImageView;
 
-import java.io.File;
 import java.util.List;
 
 public class AdapterApp extends BaseAdapter {

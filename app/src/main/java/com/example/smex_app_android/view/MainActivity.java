@@ -3,18 +3,16 @@ package com.example.smex_app_android.view;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.smex_app_android.R;
+import com.example.smex_app_android.service.UserService;
+import com.example.smex_app_android.service.impl.UserServiceImpl;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -37,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         Objects.requireNonNull(getSupportActionBar()).hide();
-        SharedPreferences sharedPreferences = getSharedPreferences("start_app", MODE_PRIVATE);
-        boolean startAppChecked = sharedPreferences.getBoolean("isMoney", false);
+        UserService userService = new UserServiceImpl(this);
+        boolean startAppChecked = userService.checkerFirstStartApp();
         if (startAppChecked) {
             bottomNavigationView = findViewById(R.id.bottom_navigation);
             getSupportFragmentManager().beginTransaction().replace(R.id.container, home).commit();

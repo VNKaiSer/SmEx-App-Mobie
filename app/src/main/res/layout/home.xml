@@ -88,10 +88,10 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/totalMoney"
+            android:id="@+id/userName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="$12,000,000"
+            android:text="Hi, "
             android:textColor="@color/black"
             android:textSize="20dp" />
 

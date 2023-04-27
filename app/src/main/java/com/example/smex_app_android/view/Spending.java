@@ -21,7 +21,9 @@ import com.example.smex_app_android.R;
 import com.example.smex_app_android.model.KhoanChi;
 import com.example.smex_app_android.model.LoaiKhoanChi;
 import com.example.smex_app_android.service.CRUDService;
-import com.example.smex_app_android.service.KhoanChiService;
+import com.example.smex_app_android.service.UserService;
+import com.example.smex_app_android.service.impl.KhoanChiServiceImpl;
+import com.example.smex_app_android.service.impl.UserServiceImpl;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -43,7 +45,7 @@ public class Spending extends AppCompatActivity {
 
     private EditText edtMoney;
 
-    private int mYear, mMonth, mDay, mHour, mMinute;
+    private int mYear, mMonth, mDay;
 
 
     @Override
@@ -183,21 +185,20 @@ public class Spending extends AppCompatActivity {
 
     private void insertKhoanChi() {
         try {
-            CRUDService<KhoanChi> service = new KhoanChiService();
+            // lưu vào database
+            CRUDService<KhoanChi> khoanChiService = new KhoanChiServiceImpl();
             String mota = ((EditText)findViewById(R.id.editTextTextMultiLine)).getText().toString();
             String ngayChi = time.getText().toString();
-            Double soTien = Double.parseDouble(edtMoney.getText().toString());
-
-
+            Integer soTien = Integer.parseInt(edtMoney.getText().toString());
             KhoanChi khoanChi = new KhoanChi(LoaiKhoanChi.AN, ngayChi, mota, soTien);
-            service.insert(khoanChi);
-            System.out.println(service.get(1));
+            khoanChiService.insert(khoanChi);
+
+            // cập nhật số tiền của người dùng
+            UserService userService = new UserServiceImpl(this);
+            userService.useMoney(soTien);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-
-        //
     }
 
     private boolean checkInformation() {
@@ -215,7 +216,6 @@ public class Spending extends AppCompatActivity {
             return false;
         }
 
-        // check ngay
         /**
          * Ngày mặc định là ngày hiện tại, ngày thêm khoản thu thì không được là tương lai
          */
@@ -240,6 +240,7 @@ public class Spending extends AppCompatActivity {
         }
 
         Toast.makeText(this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+
         View rootView = getWindow().getDecorView().findViewById(android.R.id.content);
         Animation anim = AnimationUtils.loadAnimation(Spending.this, R.anim.slide_in_down);
         rootView.startAnimation(anim);
@@ -254,7 +255,7 @@ public class Spending extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                rootView.setVisibility(View.GONE); // Hide the view when animation is finished
+                rootView.setVisibility(View.GONE);
                 finish();
             }
 

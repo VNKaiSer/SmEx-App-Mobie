@@ -2,7 +2,6 @@ package com.example.smex_app_android.view;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +16,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.adapter.CustomArrayAdapter;
 import com.example.smex_app_android.R;
+import com.example.smex_app_android.service.UserService;
+import com.example.smex_app_android.service.impl.UserServiceImpl;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -36,8 +37,8 @@ public class Home extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home, container, false);
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("start_app", getActivity().MODE_PRIVATE);
-        int money = sharedPreferences.getInt("money", 0);
+        UserService service = new UserServiceImpl(getContext());
+        int money = service.getMoney();
         String currentPrice = String.valueOf(money);
         if (money >= 1000) {
             StringBuilder temp = new StringBuilder();

@@ -4,16 +4,41 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class UserReposity {
-    private void getInformation(Context context){
-        SharedPreferences pre = context.getSharedPreferences("user" , Context.MODE_PRIVATE);
+    private SharedPreferences pre;
+    private Context context;
+    public UserReposity(Context context){
+        this.context = context;
+        this.pre = context.getSharedPreferences("user_info", context.MODE_PRIVATE);
+
+    }
+    public void saveInformation(boolean check, String userName, int money){
         SharedPreferences.Editor editor = pre.edit();
-
-        editor.commit();
+        editor.putBoolean("isMoney", check);
+        editor.putInt("money", money);
+        editor.putString("username",userName);
+        editor.apply();
     }
 
 
 
-    private void restorePreferences(Context context){
-        SharedPreferences pre = context.getSharedPreferences("user", Context.MODE_PRIVATE);
+    public boolean checkerFirstStartApp(){
+        return pre.getBoolean("isMoney", false);
     }
+
+    public int getMoney(){
+        return pre.getInt("money", 0);
+    }
+
+    public boolean useMoney(int money){
+        if (getMoney() - money < 0){
+            return false;
+        }
+
+        SharedPreferences.Editor editor = pre.edit();
+        editor.putInt("money", getMoney() - money);
+        editor.apply();
+        return true;
+    }
+
+
 }
