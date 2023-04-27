@@ -1,4 +1,4 @@
-package com.example.smex_app_android.view;
+package com.example.smex_app_android.views;
 
 import android.content.Intent;
 import android.os.Bundle;

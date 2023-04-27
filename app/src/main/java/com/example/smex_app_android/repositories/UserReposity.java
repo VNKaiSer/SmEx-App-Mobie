@@ -1,4 +1,4 @@
-package com.example.smex_app_android.repository;
+package com.example.smex_app_android.repositories;
 
 import android.content.Context;
 import android.content.SharedPreferences;

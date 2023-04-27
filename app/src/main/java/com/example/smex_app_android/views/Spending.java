@@ -1,4 +1,4 @@
-package com.example.smex_app_android.view;
+package com.example.smex_app_android.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,12 +18,12 @@ import android.widget.Toast;
 
 import com.example.adapter.ImageAdapter;
 import com.example.smex_app_android.R;
-import com.example.smex_app_android.model.KhoanChi;
-import com.example.smex_app_android.model.LoaiKhoanChi;
-import com.example.smex_app_android.service.CRUDService;
-import com.example.smex_app_android.service.UserService;
-import com.example.smex_app_android.service.impl.KhoanChiServiceImpl;
-import com.example.smex_app_android.service.impl.UserServiceImpl;
+import com.example.smex_app_android.models.KhoanChi;
+import com.example.smex_app_android.models.LoaiKhoanChi;
+import com.example.smex_app_android.services.CRUDService;
+import com.example.smex_app_android.services.UserService;
+import com.example.smex_app_android.services.impl.KhoanChiServiceImpl;
+import com.example.smex_app_android.services.impl.UserServiceImpl;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -186,7 +186,7 @@ public class Spending extends AppCompatActivity {
     private void insertKhoanChi() {
         try {
             // lưu vào database
-            CRUDService<KhoanChi> khoanChiService = new KhoanChiServiceImpl();
+            CRUDService<KhoanChi> khoanChiService = new KhoanChiServiceImpl(this);
             String mota = ((EditText)findViewById(R.id.editTextTextMultiLine)).getText().toString();
             String ngayChi = time.getText().toString();
             Integer soTien = Integer.parseInt(edtMoney.getText().toString());

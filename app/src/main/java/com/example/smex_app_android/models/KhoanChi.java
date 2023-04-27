@@ -1,6 +1,4 @@
-package com.example.smex_app_android.model;
-
-import java.util.Date;
+package com.example.smex_app_android.models;
 
 public class KhoanChi {
     private int maKhoanChi;

@@ -1,4 +1,4 @@
-package com.example.smex_app_android.view;
+package com.example.smex_app_android.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 

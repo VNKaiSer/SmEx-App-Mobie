@@ -1,4 +1,4 @@
-package com.example.smex_app_android.view;
+package com.example.smex_app_android.views;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -19,10 +19,10 @@ import androidx.fragment.app.Fragment;
 
 import com.example.adapter.CustomArrayAdapter;
 import com.example.smex_app_android.R;
-import com.example.smex_app_android.service.KhoanChiService;
-import com.example.smex_app_android.service.UserService;
-import com.example.smex_app_android.service.impl.KhoanChiServiceImpl;
-import com.example.smex_app_android.service.impl.UserServiceImpl;
+import com.example.smex_app_android.services.KhoanChiService;
+import com.example.smex_app_android.services.UserService;
+import com.example.smex_app_android.services.impl.KhoanChiServiceImpl;
+import com.example.smex_app_android.services.impl.UserServiceImpl;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -61,29 +61,21 @@ public class Home extends Fragment {
             currentPrice = temp.toString();
         }
 
-        KhoanChiService khoanChiService = new KhoanChiServiceImpl();
+        KhoanChiService khoanChiService = new KhoanChiServiceImpl(getContext());
         TextView txtMoney = view.findViewById(R.id.totalMoney);
         TextView txtUserName = view.findViewById(R.id.userName);
         TextView txtMoneyUsed = view.findViewById(R.id.moneyUsed);
         ImageView imageView = view.findViewById(R.id.imgThemKhoanThu);
-        try {
-            if (khoanChiService.checkUsedMoneyThisDay()){
-                ListView viewKhoanChi = view.findViewById(R.id.viewKhoanChi);
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1,khoanChiService.getKhoanChiStringByDay());
-                viewKhoanChi.setAdapter(adapter);
-                viewKhoanChi.setVisibility(View.VISIBLE);
-                imageView.setVisibility(View.GONE);
-            }
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
+        if (khoanChiService.checkUsedMoneyThisDay()){
+            ListView viewKhoanChi = view.findViewById(R.id.viewKhoanChi);
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1,khoanChiService.getKhoanChiStringByDay());
+            viewKhoanChi.setAdapter(adapter);
+            viewKhoanChi.setVisibility(View.VISIBLE);
+            imageView.setVisibility(View.GONE);
         }
         txtMoney.setText("$" + currentPrice);
         txtUserName.setText("Hi, "+user);
-        try {
-            txtMoneyUsed.setText("$"+ khoanChiService.totalMoneyUsed());
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+        txtMoneyUsed.setText("$"+ khoanChiService.totalMoneyUsed());
 
         Calendar calendar = Calendar.getInstance();
         int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
