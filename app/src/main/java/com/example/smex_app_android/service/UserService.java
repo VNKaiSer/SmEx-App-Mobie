@@ -5,4 +5,6 @@ public interface UserService {
     boolean checkerFirstStartApp();
     int getMoney();
     boolean useMoney(int money);
+
+    String getUserName();
 }

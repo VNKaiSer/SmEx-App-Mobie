@@ -40,5 +40,9 @@ public class UserReposity {
         return true;
     }
 
+    public String getUserName(){
+        return pre.getString("username", "");
+    }
+
 
 }

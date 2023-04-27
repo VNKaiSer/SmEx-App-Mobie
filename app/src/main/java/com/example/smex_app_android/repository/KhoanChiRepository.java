@@ -9,6 +9,7 @@ import com.example.smex_app_android.model.LoaiKhoanChi;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -50,5 +51,11 @@ public class KhoanChiRepository implements ICRUD<KhoanChi> {
             khoanChis.add(tmp);
         }
         return khoanChis;
+    }
+
+    public int totalMoneyUsed() throws ParseException {
+        int thang = new Date().getMonth();
+        //getAll().forEach();
+        return 0;
     }
 }

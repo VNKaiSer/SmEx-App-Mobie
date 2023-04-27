@@ -23,7 +23,7 @@ public class KhoanThuRepository implements ICRUD<KhoanThu>{
         cv.put("maThuNhap", obj.getMaThu());
         cv.put("moTa", obj.getMoTa());
         cv.put("soTien", obj.getSoTien());
-        System.out.println("ssssssssssssssssssssssssssss"+ICRUD.formatter.format(obj.getNgayThu()));
+        System.out.println(""+ICRUD.formatter.format(obj.getNgayThu()));
         //cv.put("ngayThu",));
         long result = sqLiteDatabase.insert("ThuNhap", null, cv);
         return (result != -1);

@@ -38,6 +38,7 @@ public class Home extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home, container, false);
         UserService service = new UserServiceImpl(getContext());
+        String user = service.getUserName();
         int money = service.getMoney();
         String currentPrice = String.valueOf(money);
         if (money >= 1000) {
@@ -55,7 +56,9 @@ public class Home extends Fragment {
         }
 
         TextView txtMoney = view.findViewById(R.id.totalMoney);
+        TextView txtUserName = view.findViewById(R.id.userName);
         txtMoney.setText("$" + currentPrice);
+        txtUserName.setText("Hi, "+user);
         Calendar calendar = Calendar.getInstance();
         int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
