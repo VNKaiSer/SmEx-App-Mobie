@@ -7,8 +7,7 @@ public class KhoanChi {
     private String moTa;
     private double soTien;
 
-    public KhoanChi(LoaiKhoanChi loaiKhoanChi, String ngayChi, String moTa, double soTien) {
-        this.loaiKhoanChi = loaiKhoanChi;
+    public KhoanChi(String ngayChi, String moTa, double soTien) {
         this.ngayChi = ngayChi;
         this.moTa = moTa;
         this.soTien = soTien;
@@ -64,5 +63,16 @@ public class KhoanChi {
 
     public void setSoTien(double soTien) {
         this.soTien = soTien;
+    }
+
+    @Override
+    public String toString() {
+        return "KhoanChi{" +
+                "maKhoanChi=" + maKhoanChi +
+                ", loaiKhoanChi=" + String.valueOf(loaiKhoanChi) +
+                ", ngayChi='" + ngayChi + '\'' +
+                ", moTa='" + moTa + '\'' +
+                ", soTien=" + soTien +
+                '}';
     }
 }

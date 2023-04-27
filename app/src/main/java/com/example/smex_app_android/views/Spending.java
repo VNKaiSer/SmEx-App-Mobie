@@ -9,10 +9,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,13 +36,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class Spending extends AppCompatActivity {
     private List<Integer> mThumbIds = new ArrayList<>();
     private List<String> mThumbNames = new ArrayList<>();
     private Button btnTime, spen1, spen2, spen3, spen4, spen5, btnHuy;
-    private TextView time, time_text;
+    private TextView time, time_text, title_text;
     private EditText money;
 
     private Button btnThem;
@@ -46,14 +53,42 @@ public class Spending extends AppCompatActivity {
     private EditText edtMoney;
 
     private int mYear, mMonth, mDay;
-
-
+    Set<String> keys;
+    Map<String, String> map = new HashMap<>();
+    private boolean isEdit = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spending);
         getSupportActionBar().hide();
+
+        Spinner spinner = findViewById(R.id.spinner);
+        List<String> spinners = new ArrayList<>(Arrays.asList("Chi tiêu", "Thu nhập"));
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item_layout, spinners);
+        adapter.setDropDownViewResource(R.layout.spinner_item_layout);
+        spinner.setAdapter(adapter);
+        title_text = findViewById(R.id.title_text);
+        GridView mGridView = findViewById(R.id.grid_view);
+        RelativeLayout danhMuc = findViewById(R.id.danhMuc);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == 0) {
+                    mGridView.setVisibility(View.VISIBLE);
+                    danhMuc.setVisibility(View.VISIBLE);
+                } else {
+                    mGridView.setVisibility(View.GONE);
+                    danhMuc.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
 
         btnHuy = findViewById(R.id.cancel);
         btnHuy.setOnClickListener(new View.OnClickListener() {
@@ -98,17 +133,16 @@ public class Spending extends AppCompatActivity {
         mThumbIds.add(R.drawable.baseline_more_horiz_24);
         mThumbIds.add(R.drawable.baseline_more_horiz_24);
 
-        mThumbNames.add("Ăn tiệm");
-        mThumbNames.add("Sinh hoạt");
-        mThumbNames.add("Đi lại");
-        mThumbNames.add("Trang phục");
-        mThumbNames.add("Hưởng thụ");
-        mThumbNames.add("Con cái");
-        mThumbNames.add("Hiếu hỉ");
-        mThumbNames.add("Nhà cửa");
-        mThumbNames.add("Sức khỏe");
-        mThumbNames.add("Bản thân");
-        mThumbNames.add("Khác");
+
+        map = new HashMap<>();
+
+        for (int i = 0; i < 11; i++) {
+            mThumbNames.add(LoaiKhoanChi.values()[i].getKhoanChi());
+            map.put(LoaiKhoanChi.values()[i].toString(), LoaiKhoanChi.values()[i].getKhoanChi());
+        }
+
+        keys = map.keySet();
+
 
         spen1 = findViewById(R.id.spen1);
         spen2 = findViewById(R.id.spen2);
@@ -128,15 +162,16 @@ public class Spending extends AppCompatActivity {
                 }
             });
         }
-        GridView mGridView = findViewById(R.id.grid_view);
+
         ImageAdapter mAdapter = new ImageAdapter(this, R.layout.sub_title, mThumbIds, mThumbNames);
         mGridView.setAdapter(mAdapter);
         mGridView.setScrollContainer(false);
         mGridView.setVerticalScrollBarEnabled(false);
         mGridView.setHorizontalScrollBarEnabled(false);
-        time_text = findViewById(R.id.time_text);
+
         mGridView.setOnItemClickListener((parent, view, position, id) -> {
-                    time_text.setText(mThumbNames.get(position));
+                    title_text.setText(mThumbNames.get(position));
+
                 }
         );
         btnTime = findViewById(R.id.time);
@@ -158,7 +193,7 @@ public class Spending extends AppCompatActivity {
                     public void onDateSet(DatePicker view, int mYear,
                                           int mMonth, int mDay) {
 
-                        time.setText(mDay + "/" + mMonth + "/" + mYear);
+                        time.setText(mDay + "/" + (mMonth + 1) + "/" + mYear);
                     }
                 };
 
@@ -174,12 +209,11 @@ public class Spending extends AppCompatActivity {
         btnThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkInformation()){
+                if (checkInformation()) {
                     insertKhoanChi();
                 }
             }
         });
-
 
 
     }
@@ -188,10 +222,16 @@ public class Spending extends AppCompatActivity {
         try {
             // lưu vào database
             CRUDService<KhoanChi> khoanChiService = new KhoanChiServiceImpl(getApplicationContext());
-            String mota = ((EditText)findViewById(R.id.editTextTextMultiLine)).getText().toString();
+            String mota = ((EditText) findViewById(R.id.editTextTextMultiLine)).getText().toString();
             String ngayChi = time.getText().toString();
             Integer soTien = Integer.parseInt(edtMoney.getText().toString());
-            KhoanChi khoanChi = new KhoanChi(LoaiKhoanChi.AN, ngayChi, mota, soTien);
+            String loaiKhoanChi = title_text.getText().toString();
+            KhoanChi khoanChi = new KhoanChi(ngayChi, mota, soTien);
+            for (String key : keys) {
+                if (loaiKhoanChi.equals(map.get(key))) {
+                    khoanChi.setLoaiKhoanChi(LoaiKhoanChi.valueOf(key));
+                }
+            }
             khoanChiService.insert(khoanChi);
 
             // cập nhật số tiền của người dùng
@@ -205,13 +245,13 @@ public class Spending extends AppCompatActivity {
     private boolean checkInformation() {
         String money = edtMoney.getText().toString().trim();
         // check so tien
-        if (money.equals("")){
+        if (money.equals("")) {
             Toast.makeText(this, "Số tiền không được để trống", Toast.LENGTH_SHORT).show();
             edtMoney.requestFocus();
             return false;
         }
 
-        if (money.equals("0")){
+        if (money.equals("0")) {
             Toast.makeText(this, "Số tiền phải lớn hơn không", Toast.LENGTH_SHORT).show();
             edtMoney.requestFocus();
             return false;
@@ -221,7 +261,7 @@ public class Spending extends AppCompatActivity {
          * Ngày mặc định là ngày hiện tại, ngày thêm khoản thu thì không được là tương lai
          */
 
-        if (time.getText().equals("")){
+        if (time.getText().equals("")) {
             Toast.makeText(this, "Vui lòng chọn ngày của khoản chi", Toast.LENGTH_SHORT).show();
             btnTime.requestFocus();
             return false;
@@ -230,11 +270,11 @@ public class Spending extends AppCompatActivity {
         try {
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             Date date = dateFormat.parse(time.getText().toString());
-            if (date.after(new Date())){
+            if (date.after(new Date())) {
                 Toast.makeText(this, "Ngày chi không được sau ngày hiên tại", Toast.LENGTH_SHORT).show();
                 return false;
             }
-        }  catch (ParseException e) {
+        } catch (ParseException e) {
             Toast.makeText(this, "Ngày không đúng định dạng", Toast.LENGTH_SHORT).show();
             throw new RuntimeException(e);
             //return  false;

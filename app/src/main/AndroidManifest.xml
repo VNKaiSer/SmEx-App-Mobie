@@ -19,6 +19,9 @@
             android:name=".views.Home"
             android:exported="false" />
         <activity
+            android:name=".views.Setting"
+            android:exported="false" />
+        <activity
             android:name=".views.Spending"
             android:exported="false" />
         <activity

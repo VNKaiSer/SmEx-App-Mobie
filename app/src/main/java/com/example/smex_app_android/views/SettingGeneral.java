@@ -3,6 +3,7 @@ package com.example.smex_app_android.views;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.adapter.AdapterApp;
@@ -23,9 +24,14 @@ public class SettingGeneral extends AppCompatActivity {
         List<App> listApp = new ArrayList<>();
         AdapterApp adapterApp;
 
-        listView = findViewById(R.id.listApp);
+        listView = findViewById(R.id.list_app);
+        Button cancel = findViewById(R.id.cancel);
+        cancel.setOnClickListener(v -> {
+            finish();
+        });
 
         listApp.add(new App("Tổng quan", "Màn hình khởi động"));
+        listApp.add(new App("", "Cài đặt thời gian"));
         listApp.add(new App("Hệ thống", "Chế độ nền tối"));
         listApp.add(new App("", "Màu sắc ứng dụng"));
         listApp.add(new App("Tiếng việt", "Ngôn ngữ"));
