@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EDE8E8"
+    android:orientation="vertical"
+    tools:ignore="UseCompoundDrawables"
+    android:paddingHorizontal="20dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingVertical="10dp">
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:background="@drawable/baseline_arrow_back_ios_new_24"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cài đặt chung"
+            android:textColor="@color/black"
+            android:textSize="70px"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hiển thị"
+        android:textColor="#8E8E8E"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        />
+    <ListView
+        android:id="@+id/listApp"
+        android:layout_width="match_parent"
+        android:layout_height="255dp"
+        android:layout_below="@id/manager"
+        android:background="@drawable/shape" />
+
+</LinearLayout>

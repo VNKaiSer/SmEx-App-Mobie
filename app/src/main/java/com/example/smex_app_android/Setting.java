@@ -1,5 +1,6 @@
 package com.example.smex_app_android;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +43,13 @@ public class Setting extends Fragment {
 
         adapterApp = new AdapterApp(getContext(), R.layout.app_manager, listApp);
         listView.setAdapter(adapterApp);
+        listView.setOnItemClickListener((adapterView, view1, i, l) -> {
+           if(i == 0){
+               Intent intent = new Intent(getContext(), SettingGeneral.class);
+               startActivity(intent);
+           }
+        });
+
         return  view;
     }
 }

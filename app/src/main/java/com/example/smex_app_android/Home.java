@@ -1,6 +1,8 @@
 package com.example.smex_app_android;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,10 +36,30 @@ public class Home extends Fragment {
     private LinearLayout screen_home_1, screen_home_2;
     private boolean isScreenHome1Visible = true;
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home, container, false);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("start_app", getActivity().MODE_PRIVATE);
+        int money = sharedPreferences.getInt("money", 0);
+        String currentPrice = String.valueOf(money);
+        if (money >= 1000) {
+            StringBuilder temp = new StringBuilder();
+            int count = 0;
+            for (int j = currentPrice.length() - 1; j >= 0; j--) {
+                temp.insert(0, currentPrice.charAt(j));
+                count++;
+                if (count == 3 && j != 0) {
+                    temp.insert(0, ",");
+                    count = 0;
+                }
+            }
+            currentPrice = temp.toString();
+        }
+
+        TextView txtMoney = view.findViewById(R.id.totalMoney);
+        txtMoney.setText("$" + currentPrice);
         Calendar calendar = Calendar.getInstance();
         int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
