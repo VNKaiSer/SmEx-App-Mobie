@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="30dp"
+        android:src="@drawable/splash" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Bạn mới bắt đầu quan tâm đến chi tiêu cá nhân vậy tại sao bạn không đưa ra mức tiền dự kiến cho các khoản chi tiêu của mình để có thể quản lý tốt hơn."
+        android:textStyle="italic" />
+
+    <EditText
+        android:id="@+id/userName"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/border"
+        android:paddingVertical="10dp"
+        android:hint="Nhập tên của bạn"
+        android:inputType="text"
+        android:paddingHorizontal="4dp" />
+
+    <EditText
+        android:id="@+id/money"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/border"
+        android:paddingVertical="10dp"
+        android:hint="Nhập số tiền dự kiến"
+        android:inputType="number"
+        android:paddingHorizontal="4dp" />
+
+    <Button
+        android:id="@+id/start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape"
+        android:backgroundTint="#1594A5"
+        android:paddingHorizontal="10dp"
+        android:textColor="@color/white"
+        android:text="Bắt đầu sử dụng ứng dụng" />
+</LinearLayout>
