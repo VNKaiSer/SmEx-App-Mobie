@@ -1,4 +1,4 @@
-package com.example.smex_app_android.service;
+package com.example.smex_app_android.services;
 import java.text.ParseException;
 import java.util.List;
 

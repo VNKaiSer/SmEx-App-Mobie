@@ -1,4 +1,4 @@
-package com.example.smex_app_android.repository;
+package com.example.smex_app_android.repositories;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -38,6 +38,10 @@ public class UserReposity {
         editor.putInt("money", getMoney() - money);
         editor.apply();
         return true;
+    }
+
+    public String getUserName(){
+        return pre.getString("username", "");
     }
 
 

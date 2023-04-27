@@ -1,16 +1,15 @@
-package com.example.smex_app_android.view;
+package com.example.smex_app_android.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.smex_app_android.R;
-import com.example.smex_app_android.service.UserService;
-import com.example.smex_app_android.service.impl.UserServiceImpl;
+import com.example.smex_app_android.services.UserService;
+import com.example.smex_app_android.services.impl.UserServiceImpl;
 
 import java.util.Objects;
 

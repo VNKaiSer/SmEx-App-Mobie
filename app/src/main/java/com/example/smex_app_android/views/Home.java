@@ -1,4 +1,4 @@
-package com.example.smex_app_android.view;
+package com.example.smex_app_android.views;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -16,8 +16,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.adapter.CustomArrayAdapter;
 import com.example.smex_app_android.R;
-import com.example.smex_app_android.service.UserService;
-import com.example.smex_app_android.service.impl.UserServiceImpl;
+import com.example.smex_app_android.services.UserService;
+import com.example.smex_app_android.services.impl.UserServiceImpl;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -39,6 +39,8 @@ public class Home extends Fragment {
         View view = inflater.inflate(R.layout.home, container, false);
         UserService service = new UserServiceImpl(getContext());
         int money = service.getMoney();
+        String user = service.getUserName();
+
         String currentPrice = String.valueOf(money);
         if (money >= 1000) {
             StringBuilder temp = new StringBuilder();
@@ -55,7 +57,9 @@ public class Home extends Fragment {
         }
 
         TextView txtMoney = view.findViewById(R.id.totalMoney);
+        TextView txtUserName = view.findViewById(R.id.userName);
         txtMoney.setText("$" + currentPrice);
+        txtUserName.setText("Hi, "+user);
         Calendar calendar = Calendar.getInstance();
         int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         int currentDay = calendar.get(Calendar.DAY_OF_MONTH);

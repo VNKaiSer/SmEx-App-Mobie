@@ -1,9 +1,9 @@
-package com.example.smex_app_android.service.impl;
+package com.example.smex_app_android.services.impl;
 
 import android.content.Context;
 
-import com.example.smex_app_android.repository.UserReposity;
-import com.example.smex_app_android.service.UserService;
+import com.example.smex_app_android.repositories.UserReposity;
+import com.example.smex_app_android.services.UserService;
 
 public class UserServiceImpl implements UserService {
     private UserReposity reposity;
@@ -30,5 +30,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean useMoney(int money) {
         return reposity.useMoney(money);
+    }
+    @Override
+    public String getUserName() {
+        return reposity.getUserName();
     }
 }

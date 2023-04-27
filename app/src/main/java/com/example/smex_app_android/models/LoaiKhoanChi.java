@@ -1,4 +1,4 @@
-package com.example.smex_app_android.model;
+package com.example.smex_app_android.models;
 
 public enum LoaiKhoanChi {
     AN,
