@@ -3,11 +3,12 @@ package com.example.smex_app_android.service.impl;
 import com.example.smex_app_android.model.KhoanChi;
 import com.example.smex_app_android.repository.KhoanChiRepository;
 import com.example.smex_app_android.service.CRUDService;
+import com.example.smex_app_android.service.KhoanChiService;
 
 import java.text.ParseException;
 import java.util.List;
 
-public class KhoanChiServiceImpl implements CRUDService<KhoanChi> {
+public class KhoanChiServiceImpl implements KhoanChiService {
     private KhoanChiRepository khoanChiRepository;
 
     public KhoanChiServiceImpl(){
@@ -25,7 +26,12 @@ public class KhoanChiServiceImpl implements CRUDService<KhoanChi> {
     }
 
     @Override
-    public List<KhoanChi> getAll(Class<KhoanChi> clazz) {
-        return null;
+    public List<KhoanChi> getAll(Class<KhoanChi> clazz) throws ParseException {
+        return khoanChiRepository.getAll();
+    }
+
+    @Override
+    public int totalMoneyUsed() throws ParseException {
+        return khoanChiRepository.totalMoneyUsed();
     }
 }

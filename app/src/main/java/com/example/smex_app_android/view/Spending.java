@@ -148,7 +148,7 @@ public class Spending extends AppCompatActivity {
                 // Get Current Date
                 final Calendar c = Calendar.getInstance();
                 mYear = c.get(Calendar.YEAR);
-                mMonth = c.get(Calendar.MONTH);
+                mMonth = c.get(Calendar.MONTH) + 1;
                 mDay = c.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {

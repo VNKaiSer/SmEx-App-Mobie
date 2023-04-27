@@ -16,9 +16,12 @@ import androidx.fragment.app.Fragment;
 
 import com.example.adapter.CustomArrayAdapter;
 import com.example.smex_app_android.R;
+import com.example.smex_app_android.service.KhoanChiService;
 import com.example.smex_app_android.service.UserService;
+import com.example.smex_app_android.service.impl.KhoanChiServiceImpl;
 import com.example.smex_app_android.service.impl.UserServiceImpl;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -55,10 +58,19 @@ public class Home extends Fragment {
             currentPrice = temp.toString();
         }
 
+        KhoanChiService khoanChiService = new KhoanChiServiceImpl();
         TextView txtMoney = view.findViewById(R.id.totalMoney);
         TextView txtUserName = view.findViewById(R.id.userName);
+        TextView txtMoneyUsed = view.findViewById(R.id.moneyUsed);
+
         txtMoney.setText("$" + currentPrice);
         txtUserName.setText("Hi, "+user);
+        try {
+            txtMoneyUsed.setText(khoanChiService.totalMoneyUsed()+"");
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
         Calendar calendar = Calendar.getInstance();
         int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
