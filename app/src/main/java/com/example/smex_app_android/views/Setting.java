@@ -44,8 +44,7 @@ public class Setting extends Fragment {
         listView.setAdapter(adapterApp);
         listView.setOnItemClickListener((adapterView, view1, i, l) -> {
            if(i == 0){
-               Intent intent = new Intent(getContext(), SettingGeneral.class);
-               startActivity(intent);
+
            }
         });
 

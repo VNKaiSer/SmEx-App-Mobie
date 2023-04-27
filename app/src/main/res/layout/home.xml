@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="18dp"
         android:layout_marginTop="20dp"
-        android:text="$0"
+        android:text="Chúc một ngày tốt lành"
         android:textColor="#fff"
         android:textSize="20dp" />
 

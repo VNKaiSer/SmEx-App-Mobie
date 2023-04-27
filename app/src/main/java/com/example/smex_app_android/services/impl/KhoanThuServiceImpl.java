@@ -9,12 +9,13 @@ import com.example.smex_app_android.models.KhoanThu;
 import com.example.smex_app_android.repositories.KhoanChiProvider;
 import com.example.smex_app_android.repositories.KhoanThuProvider;
 import com.example.smex_app_android.services.CRUDService;
+import com.example.smex_app_android.services.KhoanThuService;
 
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KhoanThuServiceImpl implements CRUDService<KhoanThu> {
+public class KhoanThuServiceImpl implements KhoanThuService {
     private KhoanThuProvider khoanChiProvider;
     private Context context;
 

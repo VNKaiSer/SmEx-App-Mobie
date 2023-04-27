@@ -239,6 +239,12 @@ public class Spending extends AppCompatActivity {
             //return  false;
         }
 
+        UserService userService = new UserServiceImpl(this);
+        if (userService.getMoney() < Double.parseDouble(money)){
+            Toast.makeText(this, "Số tiền còn lại không đủ chi cho khoản này", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
         Toast.makeText(this, "Thêm thành công", Toast.LENGTH_SHORT).show();
 
         View rootView = getWindow().getDecorView().findViewById(android.R.id.content);

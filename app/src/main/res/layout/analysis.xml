@@ -58,8 +58,7 @@
         android:textStyle="bold"
         android:textSize="18dp"
         android:layout_marginLeft="5dp"/>
-
-    <TextView
+    <com.example.smex_app_android.views.DualColumnChart
         android:id="@+id/bieuDo"
         android:layout_width="match_parent"
         android:layout_height="200dp"

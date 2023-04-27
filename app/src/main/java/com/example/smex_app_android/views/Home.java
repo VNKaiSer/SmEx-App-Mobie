@@ -66,12 +66,14 @@ public class Home extends Fragment {
         TextView txtUserName = view.findViewById(R.id.userName);
         TextView txtMoneyUsed = view.findViewById(R.id.moneyUsed);
         ImageView imageView = view.findViewById(R.id.imgThemKhoanThu);
+        TextView statusChi = view.findViewById(R.id.statusChi);
         if (khoanChiService.checkUsedMoneyThisDay()){
             ListView viewKhoanChi = view.findViewById(R.id.viewKhoanChi);
             ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1,khoanChiService.getKhoanChiStringByDay());
             viewKhoanChi.setAdapter(adapter);
             viewKhoanChi.setVisibility(View.VISIBLE);
             imageView.setVisibility(View.GONE);
+            statusChi.setText("Bạn đã chi " + adapter.getCount() + " khoản cho hôm nay");
         }
         txtMoney.setText("$" + currentPrice);
         txtUserName.setText("Hi, "+user);
