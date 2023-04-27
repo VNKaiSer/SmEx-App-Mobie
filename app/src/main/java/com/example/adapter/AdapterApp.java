@@ -1,6 +1,15 @@
 package com.example.adapter;
 
+import com.example.smex_app_android.SettingGeneral;
+import com.example.smex_app_android.Spending;
+import com.google.android.material.imageview.ShapeableImageView;
+
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RoundRectShape;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +23,13 @@ import com.example.entity.Plan;
 import com.example.smex_app_android.R;
 import com.google.android.material.imageview.ShapeableImageView;
 
+import java.io.File;
 import java.util.List;
 
 public class AdapterApp extends BaseAdapter {
 
     private Context context;
-    private  int layout;
+    private int layout;
     private List<App> listApp;
 
     public AdapterApp(Context context, int layout, List<App> listApp) {
@@ -52,12 +62,25 @@ public class AdapterApp extends BaseAdapter {
         App app = listApp.get(i);
 
         TextView title = view.findViewById(R.id.textApp);
+        TextView detail = view.findViewById(R.id.detail);
         ImageView icon = view.findViewById(R.id.iconApp);
+
         String iconName = app.getIcon();
         int resId = context.getResources().getIdentifier(iconName, "drawable", context.getPackageName());
+        if (detail != null) {
 
-        title.setText(app.getText());
+            if (resId != 0) {
+                detail.setVisibility(View.GONE);
+                icon.setVisibility(View.GONE);
+            } else {
+                detail.setText(app.getIcon());
+            }
+        }
+
         icon.setImageResource(resId);
+        title.setText(app.getText());
+
+
 
 
         return view;

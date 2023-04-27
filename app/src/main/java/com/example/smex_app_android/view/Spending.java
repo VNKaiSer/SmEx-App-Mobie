@@ -36,7 +36,7 @@ public class Spending extends AppCompatActivity {
     private List<Integer> mThumbIds = new ArrayList<>();
     private List<String> mThumbNames = new ArrayList<>();
     private Button btnTime, spen1, spen2, spen3, spen4, spen5, btnHuy;
-    private TextView time;
+    private TextView time, time_text;
     private EditText money;
 
     private Button btnThem;
@@ -131,6 +131,11 @@ public class Spending extends AppCompatActivity {
         mGridView.setScrollContainer(false);
         mGridView.setVerticalScrollBarEnabled(false);
         mGridView.setHorizontalScrollBarEnabled(false);
+        time_text = findViewById(R.id.time_text);
+        mGridView.setOnItemClickListener((parent, view, position, id) -> {
+                    time_text.setText(mThumbNames.get(position));
+                }
+        );
         btnTime = findViewById(R.id.time);
         time = findViewById(R.id.time_text);
         money = findViewById(R.id.edtMoney);

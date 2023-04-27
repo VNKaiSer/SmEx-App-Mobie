@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="10dp">
+
+
+    <TextView
+        android:id="@+id/textApp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:text="Cài đặt chung"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_toLeftOf="@id/arrow"
+        android:text="Cài đặt chung"
+        android:textColor="@color/black" />
+
+    <ImageView
+        android:id="@+id/iconApp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_toLeftOf="@id/arrow"
+        android:backgroundTint="#E3F4FA"
+        android:padding="10dp"
+        android:src="@drawable/baseline_settings_suggest_24" />
+
+
+
+    <ImageButton
+        android:id="@+id/arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:background="@android:color/transparent"
+        android:src="@drawable/baseline_arrow_forward_ios_24_gray" />
+</RelativeLayout>

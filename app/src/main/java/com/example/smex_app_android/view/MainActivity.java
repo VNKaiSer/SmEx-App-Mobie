@@ -1,8 +1,14 @@
 package com.example.smex_app_android.view;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,36 +37,44 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         Objects.requireNonNull(getSupportActionBar()).hide();
+        SharedPreferences sharedPreferences = getSharedPreferences("start_app", MODE_PRIVATE);
+        boolean startAppChecked = sharedPreferences.getBoolean("isMoney", false);
+        if (startAppChecked) {
+            bottomNavigationView = findViewById(R.id.bottom_navigation);
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, home).commit();
 
-        bottomNavigationView = findViewById(R.id.bottom_navigation);
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, home).commit();
+            bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+                @SuppressLint("NonConstantResourceId")
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.home:
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container, home).commit();
+                            return true;
+                        case R.id.analysis:
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container, analysis).commit();
+                            return true;
+                        case R.id.plan:
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container, plan).commit();
+                            return true;
+                        case R.id.setting:
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container, setting).commit();
+                            return true;
+                        default:
+                            return false;
 
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @SuppressLint("NonConstantResourceId")
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.home:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, home).commit();
-                        return true;
-                    case R.id.analysis:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, analysis).commit();
-                        return true;
-                    case R.id.plan:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, plan).commit();
-                        return true;
-                    case R.id.setting:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, setting).commit();
-                        return true;
-                    default:
-                        return false;
 
+                    }
 
                 }
-
-            }
-        });
+            });
+        } else {
+            Intent intent = new Intent(this, Splash.class);
+            startActivity(intent);
+            finish();
+        }
 
 
     }
+
 }
