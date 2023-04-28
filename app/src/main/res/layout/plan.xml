@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/pricePlan"
         android:layout_marginTop="10dp"
-        android:max="500000"
+        android:max="1000"
         android:progress="0"
         android:progressDrawable="@drawable/custom_seekbar"
         android:thumb="@drawable/thumb" />
