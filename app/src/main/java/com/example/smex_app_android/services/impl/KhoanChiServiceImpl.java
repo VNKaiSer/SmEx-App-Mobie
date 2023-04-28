@@ -56,4 +56,13 @@ public class KhoanChiServiceImpl implements CRUDService<KhoanChi> {
         }
         return khoanChis;
     }
+
+
+    public double totalMoney() {
+        double total = 0;
+        for (KhoanChi khoanChi : getAll(KhoanChi.class)) {
+            total += khoanChi.getSoTien();
+        }
+        return total;
+    }
 }

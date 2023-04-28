@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <application
         android:name=".Application"
         android:allowBackup="true"
@@ -40,12 +41,13 @@
             android:name=".views.PlanFrg"
             android:exported="false" />
 
+   
         <provider
-            android:authorities="com.example.smex.KhoanChiProvider"
-            android:name=".repositories.KhoanChiProvider"/>
+            android:name=".repositories.KhoanChiProvider"
+            android:authorities="com.example.smex.KhoanChiProvider" />
         <provider
-            android:authorities="com.example.smex.KhoanThuProvider"
-            android:name=".repositories.KhoanThuProvider"/>
+            android:name=".repositories.KhoanThuProvider"
+            android:authorities="com.example.smex.KhoanThuProvider" />
     </application>
 
 </manifest>
