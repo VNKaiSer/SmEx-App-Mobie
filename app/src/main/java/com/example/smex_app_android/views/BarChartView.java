@@ -58,11 +58,6 @@ public class BarChartView extends View {
         mPaint.setColor(Color.WHITE);
         canvas.drawRect(0, 0, mWidth, mHeight, mPaint);
 
-        // Draw y-axis label
-        mPaint.setColor(Color.BLACK);
-        mPaint.setTextSize(24);
-        canvas.drawText("$", mPadding / 2, mPadding, mPaint);
-
         int maxData = getMaxData();
         int barHeight = mHeight - mPadding * 3 - 32;
 
@@ -75,6 +70,11 @@ public class BarChartView extends View {
 
             mPaint.setColor(Color.parseColor("#add8e6"));
             canvas.drawRect(barLeft, barTop, barRight, barBottom, mPaint);
+            // Draw label above the bar
+            mPaint.setColor(Color.BLACK);
+            mPaint.setTextSize(24);
+            mPaint.setTextAlign(Paint.Align.CENTER);
+            canvas.drawText(String.valueOf(mData[i]), barLeft + mBarWidth / 2, barTop - 16, mPaint);
         }
         // Draw x-axis label
         mPaint.setColor(Color.BLACK);

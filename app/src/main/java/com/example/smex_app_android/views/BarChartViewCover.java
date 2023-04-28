@@ -31,8 +31,8 @@ public class BarChartViewCover extends View {
     private void init() {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setStyle(Paint.Style.FILL);
-        mPadding = 32;
-        mBarWidth = 64;
+        mPadding = 22;
+        mBarWidth = 54;
         mData = new int[]{500, 750, 1000, 1250, 1500, 1400, 1300, 1200, 1100, 1000, 900, 800};
         mLabels = new String[]{"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
     }
@@ -52,11 +52,6 @@ public class BarChartViewCover extends View {
         mPaint.setColor(Color.WHITE);
         canvas.drawRect(0, 0, mWidth, mHeight, mPaint);
 
-        // Draw y-axis label
-        mPaint.setColor(Color.BLACK);
-        mPaint.setTextSize(24);
-        canvas.drawText("$", mPadding / 2, mPadding, mPaint);
-
         int maxData = getMaxData();
         int barHeight = mHeight - mPadding * 3 - 32;
 
@@ -69,19 +64,18 @@ public class BarChartViewCover extends View {
 
             mPaint.setColor(Color.RED);
             canvas.drawRect(barLeft, barTop, barRight, barBottom, mPaint);
-        }
-        // Draw x-axis label
-        mPaint.setColor(Color.BLACK);
-        mPaint.setTextSize(24);
-        for (int i = 0; i < mLabels.length; i++) {
-            int labelX = mPadding + i * (mBarWidth + mPadding) + mBarWidth / 2;
-            int labelY = mHeight - mPadding;
-            canvas.drawText(mLabels[i], labelX, labelY, mPaint);
+
+            // Draw label on the top of the bar
+            mPaint.setColor(Color.BLACK);
+            mPaint.setTextSize(32);
+            mPaint.setTextAlign(Paint.Align.CENTER);
+            canvas.drawText(String.valueOf(mData[i]), barRight, barTop + mPadding, mPaint);
         }
 
 
 
     }
+
 
 
     private int getMaxData() {
