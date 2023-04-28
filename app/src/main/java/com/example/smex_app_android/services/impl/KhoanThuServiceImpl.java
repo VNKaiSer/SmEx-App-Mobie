@@ -9,12 +9,13 @@ import com.example.smex_app_android.models.KhoanThu;
 import com.example.smex_app_android.repositories.KhoanChiProvider;
 import com.example.smex_app_android.repositories.KhoanThuProvider;
 import com.example.smex_app_android.services.CRUDService;
+import com.example.smex_app_android.services.KhoanThuService;
 
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KhoanThuServiceImpl implements CRUDService<KhoanThu> {
+public class KhoanThuServiceImpl implements KhoanThuService {
     private KhoanThuProvider khoanChiProvider;
     private Context context;
 
@@ -28,9 +29,9 @@ public class KhoanThuServiceImpl implements CRUDService<KhoanThu> {
     @Override
     public boolean insert(KhoanThu obj) {
         ContentValues cv = new ContentValues();
-        cv.put("maThuNhap", obj.getMaThu());
         cv.put("moTa", obj.getMoTa());
         cv.put("soTien", obj.getSoTien());
+        cv.put("ngayThu", obj.getNgayThu());
         Uri uri = context.getContentResolver().insert(KhoanThuProvider.CONTENT_URI, cv);
         return (uri != null);
     }
@@ -42,7 +43,7 @@ public class KhoanThuServiceImpl implements CRUDService<KhoanThu> {
     }
 
     @Override
-    public List<KhoanThu> getAll(Class<KhoanThu> clazz) {
+    public List<KhoanThu> getAll() {
         List<KhoanThu> khoanChis = new ArrayList<>();
         Cursor cursor = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {

@@ -35,4 +35,10 @@ public class UserServiceImpl implements UserService {
     public String getUserName() {
         return reposity.getUserName();
     }
+
+    @Override
+    public boolean addMoney(int money) {
+        return reposity.addMoney(money);
+    }
+
 }

@@ -6,19 +6,25 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.adapter.CustomArrayAdapter;
 import com.example.smex_app_android.R;
+import com.example.smex_app_android.services.KhoanChiService;
 import com.example.smex_app_android.services.UserService;
+import com.example.smex_app_android.services.impl.KhoanChiServiceImpl;
 import com.example.smex_app_android.services.impl.UserServiceImpl;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -38,9 +44,8 @@ public class Home extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home, container, false);
         UserService service = new UserServiceImpl(getContext());
-        int money = service.getMoney();
         String user = service.getUserName();
-
+        int money = service.getMoney();
         String currentPrice = String.valueOf(money);
         if (money >= 1000) {
             StringBuilder temp = new StringBuilder();
@@ -55,11 +60,27 @@ public class Home extends Fragment {
             }
             currentPrice = temp.toString();
         }
+        TextView nameAvatar = view.findViewById(R.id.nameAvatar);
+        nameAvatar.setText(user.substring(0, 1).toUpperCase());
 
+        KhoanChiService khoanChiService = new KhoanChiServiceImpl(getContext());
         TextView txtMoney = view.findViewById(R.id.totalMoney);
         TextView txtUserName = view.findViewById(R.id.userName);
+        TextView txtMoneyUsed = view.findViewById(R.id.moneyUsed);
+        ImageView imageView = view.findViewById(R.id.imgThemKhoanThu);
+        TextView statusChi = view.findViewById(R.id.statusChi);
+        if (khoanChiService.checkUsedMoneyThisDay()) {
+            ListView viewKhoanChi = view.findViewById(R.id.viewKhoanChi);
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, khoanChiService.getKhoanChiStringByDay());
+            viewKhoanChi.setAdapter(adapter);
+            viewKhoanChi.setVisibility(View.VISIBLE);
+            imageView.setVisibility(View.GONE);
+            statusChi.setText("Bạn đã chi " + adapter.getCount() + " khoản cho hôm nay");
+        }
         txtMoney.setText("$" + currentPrice);
-        txtUserName.setText("Hi, "+user);
+        txtUserName.setText("Hi, " + user);
+        txtMoneyUsed.setText("$" + khoanChiService.totalMoneyUsed());
+
         Calendar calendar = Calendar.getInstance();
         int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         int currentDay = calendar.get(Calendar.DAY_OF_MONTH);

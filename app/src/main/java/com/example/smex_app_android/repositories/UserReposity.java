@@ -43,6 +43,12 @@ public class UserReposity {
     public String getUserName(){
         return pre.getString("username", "");
     }
+    public boolean addMoney(int money){
+        SharedPreferences.Editor editor = pre.edit();
+        editor.putInt("money", getMoney() + money);
+        editor.apply();
+        return true;
+    }
 
 
 }

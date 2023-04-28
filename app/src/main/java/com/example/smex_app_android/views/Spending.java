@@ -23,10 +23,13 @@ import android.widget.Toast;
 import com.example.adapter.ImageAdapter;
 import com.example.smex_app_android.R;
 import com.example.smex_app_android.models.KhoanChi;
+import com.example.smex_app_android.models.KhoanThu;
 import com.example.smex_app_android.models.LoaiKhoanChi;
 import com.example.smex_app_android.services.CRUDService;
+import com.example.smex_app_android.services.KhoanThuService;
 import com.example.smex_app_android.services.UserService;
 import com.example.smex_app_android.services.impl.KhoanChiServiceImpl;
+import com.example.smex_app_android.services.impl.KhoanThuServiceImpl;
 import com.example.smex_app_android.services.impl.UserServiceImpl;
 
 import java.text.DateFormat;
@@ -56,6 +59,8 @@ public class Spending extends AppCompatActivity {
     Set<String> keys;
     Map<String, String> map = new HashMap<>();
     private boolean isEdit = false;
+    private boolean isThuNhap = false;
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +68,7 @@ public class Spending extends AppCompatActivity {
         setContentView(R.layout.activity_spending);
         getSupportActionBar().hide();
 
-        Spinner spinner = findViewById(R.id.spinner);
+        spinner = findViewById(R.id.spinner);
         List<String> spinners = new ArrayList<>(Arrays.asList("Chi tiêu", "Thu nhập"));
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item_layout, spinners);
         adapter.setDropDownViewResource(R.layout.spinner_item_layout);
@@ -210,13 +215,37 @@ public class Spending extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (checkInformation()) {
-                    insertKhoanChi();
+                    if ((spinner.getSelectedItemPosition() == 0)) {
+                        insertKhoanChi();
+                    } else {
+                        insertKhoanThu();
+                    }
                 }
             }
         });
 
 
     }
+    private void insertKhoanThu() {
+        try {
+            // lưu vào database
+            KhoanThuService khoanThuService = new KhoanThuServiceImpl(getApplicationContext());
+            String mota = ((EditText) findViewById(R.id.editTextTextMultiLine)).getText().toString();
+            String ngayThu = time.getText().toString();
+            Integer soTien = Integer.parseInt(edtMoney.getText().toString());
+            KhoanThu khoanThu = new KhoanThu(mota, soTien, ngayThu);
+            khoanThuService.insert(khoanThu);
+
+            // cập nhật số tiền của người dùng
+            UserService userService = new UserServiceImpl(this);
+            userService.addMoney(soTien);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
 
     private void insertKhoanChi() {
         try {
@@ -227,11 +256,15 @@ public class Spending extends AppCompatActivity {
             Integer soTien = Integer.parseInt(edtMoney.getText().toString());
             String loaiKhoanChi = title_text.getText().toString();
             KhoanChi khoanChi = new KhoanChi(ngayChi, mota, soTien);
+            // mặc định loại khoản chi là khác
+            khoanChi.setLoaiKhoanChi(LoaiKhoanChi.KHAC);
             for (String key : keys) {
                 if (loaiKhoanChi.equals(map.get(key))) {
                     khoanChi.setLoaiKhoanChi(LoaiKhoanChi.valueOf(key));
                 }
             }
+
+
             khoanChiService.insert(khoanChi);
 
             // cập nhật số tiền của người dùng
@@ -243,6 +276,7 @@ public class Spending extends AppCompatActivity {
     }
 
     private boolean checkInformation() {
+
         String money = edtMoney.getText().toString().trim();
         // check so tien
         if (money.equals("")) {
@@ -280,7 +314,9 @@ public class Spending extends AppCompatActivity {
             //return  false;
         }
 
-        Toast.makeText(this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+
+
+
 
         View rootView = getWindow().getDecorView().findViewById(android.R.id.content);
         Animation anim = AnimationUtils.loadAnimation(Spending.this, R.anim.slide_in_down);

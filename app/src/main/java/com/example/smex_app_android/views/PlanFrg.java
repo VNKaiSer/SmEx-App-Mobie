@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.example.adapter.AdapterPlan;
 import com.example.entity.Plan;
 import com.example.smex_app_android.R;
+import com.example.smex_app_android.services.KhoanChiService;
 import com.example.smex_app_android.services.UserService;
 import com.example.smex_app_android.services.impl.KhoanChiServiceImpl;
 import com.example.smex_app_android.services.impl.UserServiceImpl;
@@ -53,13 +54,10 @@ public class PlanFrg extends Fragment {
         listPlan = new ArrayList<>();
         TextView hanMucChiTieu = view.findViewById(R.id.hanMucChiTieu);
         UserService service = new UserServiceImpl(getContext());
-        KhoanChiServiceImpl khoanChiService = new KhoanChiServiceImpl(getContext());
-        Calendar calendar = Calendar.getInstance();
-        int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-        TextView avg = view.findViewById(R.id.avg);
-        double avgMoney = khoanChiService.totalMoney();
-        avg.setText("$" + avgMoney / maxDay);
+//        int money = service.getMoney();
 
+        TextView nameAvatar = view.findViewById(R.id.nameAvatar);
+        nameAvatar.setText(service.getUserName().substring(0, 1).toUpperCase());
 
         try {
             File directory = getContext().getFilesDir();
@@ -158,6 +156,13 @@ public class PlanFrg extends Fragment {
 
             }
         });
+
+        KhoanChiService khoanChiService = new KhoanChiServiceImpl(getContext());
+        Calendar calendar = Calendar.getInstance();
+        int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        TextView avg = view.findViewById(R.id.avg);
+        double avgMoney = khoanChiService.totalMoney();
+        avg.setText("$" + avgMoney / maxDay);
 
         return view;
     }

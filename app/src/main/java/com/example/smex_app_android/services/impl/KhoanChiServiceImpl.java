@@ -4,17 +4,22 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 
 import com.example.smex_app_android.models.KhoanChi;
 import com.example.smex_app_android.models.LoaiKhoanChi;
 import com.example.smex_app_android.repositories.KhoanChiProvider;
 import com.example.smex_app_android.services.CRUDService;
+import com.example.smex_app_android.services.KhoanChiService;
 
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
-public class KhoanChiServiceImpl implements CRUDService<KhoanChi> {
+public class KhoanChiServiceImpl implements KhoanChiService {
     private KhoanChiProvider khoanChiProvider;
     private Context context;
 
@@ -43,7 +48,7 @@ public class KhoanChiServiceImpl implements CRUDService<KhoanChi> {
     }
 
     @Override
-    public List<KhoanChi> getAll(Class<KhoanChi> clazz) {
+    public List<KhoanChi> getAll() {
         List<KhoanChi> khoanChis = new ArrayList<>();
         Cursor cursor = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -57,10 +62,86 @@ public class KhoanChiServiceImpl implements CRUDService<KhoanChi> {
         return khoanChis;
     }
 
+    public int totalMoneyUsed() {
 
+
+        AtomicInteger totalMoney = new AtomicInteger();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            LocalDate currentDate = LocalDate.now();
+            int monthC = currentDate.getMonthValue();
+            int yearC = currentDate.getYear();
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                getAll().forEach(
+                        s->{
+                            DateTimeFormatter formatter = null;
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+
+                                LocalDate date = LocalDate.parse(s.getNgayChi(), formatter);
+                                int month = date.getMonthValue();
+                                int year = date.getYear();
+                                if (month == monthC && year == yearC){
+                                    totalMoney.addAndGet((int) s.getSoTien());
+                                }
+                            }
+                        }
+                );
+            }
+        }
+        return totalMoney.get();
+    }
+
+    public boolean checkUsedMoneyThisDay() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            LocalDate currentDate = LocalDate.now();
+            int monthC = currentDate.getMonthValue();
+            int yearC = currentDate.getYear();
+            for (KhoanChi s :
+                    getAll()) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+                LocalDate date = LocalDate.parse(s.getNgayChi(), formatter);
+                int month = date.getMonthValue();
+                int year = date.getYear();
+                if (month == monthC && year == yearC) return true;
+            }
+        }
+        return false;
+
+    }
+
+    public ArrayList<String> getKhoanChiStringByDay() {
+        ArrayList<String> data = new ArrayList<>();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            LocalDate currentDate = LocalDate.now();
+            int monthC = currentDate.getMonthValue();
+            int yearC = currentDate.getYear();
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                AtomicInteger stt = new AtomicInteger(1);
+                getAll().forEach(
+                        s->{
+                            DateTimeFormatter formatter = null;
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+
+                                LocalDate date = LocalDate.parse(s.getNgayChi(), formatter);
+                                int month = date.getMonthValue();
+                                int year = date.getYear();
+                                if (month == monthC && year == yearC){
+                                    data.add((stt.getAndIncrement()) + " - " + s.getLoaiKhoanChi() +" - " + s.getSoTien() +" $");
+                                }
+                            }
+                        }
+                );
+            }
+        }
+        return data;
+    }
+    @Override
     public double totalMoney() {
         double total = 0;
-        for (KhoanChi khoanChi : getAll(KhoanChi.class)) {
+        for (KhoanChi khoanChi : getAll()) {
             total += khoanChi.getSoTien();
         }
         return total;

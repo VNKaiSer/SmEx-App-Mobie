@@ -6,4 +6,5 @@ public interface UserService {
     int getMoney();
     boolean useMoney(int money);
     String getUserName();
+    boolean addMoney(int money);
 }

@@ -9,6 +9,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,7 +17,9 @@ import androidx.annotation.Nullable;
 import com.example.smex_app_android.Application;
 
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class KhoanChiProvider extends ContentProvider {
@@ -103,9 +106,7 @@ public class KhoanChiProvider extends ContentProvider {
         return database;
     }
 
-    public int totalMoneyUsed() throws ParseException {
-        int thang = new Date().getMonth();
-        //getAll().forEach();
-        return 0;
-    }
+
+
+
 }

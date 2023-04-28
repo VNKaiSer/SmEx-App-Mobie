@@ -11,10 +11,13 @@ import androidx.fragment.app.Fragment;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.adapter.AdapterApp;
 import com.example.entity.App;
 import com.example.smex_app_android.R;
+import com.example.smex_app_android.services.UserService;
+import com.example.smex_app_android.services.impl.UserServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +53,9 @@ public class Setting extends Fragment {
 
         adapterApp = new AdapterApp(getContext(), R.layout.app_manager, listApp);
         listView.setAdapter(adapterApp);
-
+        UserService service = new UserServiceImpl(getContext());
+        TextView nameAvatar = view.findViewById(R.id.nameAvatar);
+        nameAvatar.setText(service.getUserName().substring(0, 1).toUpperCase());
 
 
         return view;

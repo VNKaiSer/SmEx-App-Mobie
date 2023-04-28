@@ -7,15 +7,15 @@ public class KhoanThu {
     private String moTa;
     private double soTien;
 
-    private Date ngayThu;
+    private String ngayThu;
 
     public KhoanThu() {
     }
 
-    public KhoanThu(int maThu, String moTa, double soTien, Date ngayThu) {
-        this.maThu = maThu;
+    public KhoanThu( String moTa, double soTien, String ngayThu) {
         this.moTa = moTa;
         this.soTien = soTien;
+        this.ngayThu = ngayThu;
     }
 
     public int getMaThu() {
@@ -41,11 +41,11 @@ public class KhoanThu {
     public void setSoTie(double soTie) {
         this.soTien = soTie;
     }
-    public Date getNgayThu() {
+    public String getNgayThu() {
         return ngayThu;
     }
 
-    public void setNgayThu(Date ngayThu) {
+    public void setNgayThu(String ngayThu) {
         this.ngayThu = ngayThu;
     }
 }
