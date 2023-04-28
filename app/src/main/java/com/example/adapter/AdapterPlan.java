@@ -17,6 +17,23 @@ import com.example.smex_app_android.R;
 
 import java.util.List;
 
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
+import org.w3c.dom.Element;
+
+import java.io.File;
+import java.io.IOException;
+
 public class AdapterPlan extends BaseAdapter {
 
     private Context context;
@@ -77,9 +94,12 @@ public class AdapterPlan extends BaseAdapter {
             seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    int interval = 10;
+                    int roundedProgress = ((int) Math.round(progress / interval)) * interval;
+                    seekBar.setProgress(roundedProgress);
 
-                    String newPrice = progress + "";
-                    if (progress >= 1000) {
+                    String newPrice = roundedProgress + "";
+                    if (roundedProgress >= 1000) {
                         String temp = "";
                         int count = 0;
                         for (int j = newPrice.length() - 1; j >= 0; j--) {
@@ -94,7 +114,7 @@ public class AdapterPlan extends BaseAdapter {
                     }
 
                     price.setText("$" + newPrice);
-                    plan.setPrice(progress);
+                    plan.setPrice(roundedProgress);
                 }
 
                 @Override
@@ -133,6 +153,43 @@ public class AdapterPlan extends BaseAdapter {
         price.setText("$" + currentPrice);
 
 
+        updatePlanPrice(plan.getTitle(), plan.getPrice(), context);
+
+
         return view;
     }
+
+    public void updatePlanPrice(String title, int new_price, Context ctx) {
+
+        try {
+            File directory = ctx.getFilesDir();
+            File file = new File(directory, "planDOM.xml");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(file);
+
+            NodeList nodeList = doc.getElementsByTagName("plan");
+            for (int i = 0; i < nodeList.getLength(); i++) {
+                Node node = nodeList.item(i);
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
+                    Element element = (Element) node;
+                    String planTitle = element.getElementsByTagName("title").item(0).getTextContent();
+                    if (planTitle.equals(title)) {
+                        element.getElementsByTagName("price").item(0).setTextContent(Integer.toString(new_price));
+                        break;
+                    }
+                }
+            }
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(file);
+            transformer.transform(source, result);
+
+        } catch (ParserConfigurationException | IOException | TransformerException |
+                 org.xml.sax.SAXException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

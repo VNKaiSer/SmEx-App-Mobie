@@ -2,19 +2,33 @@ package com.example.smex_app_android.views;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Xml;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.entity.Plan;
 import com.example.smex_app_android.R;
 import com.example.smex_app_android.services.UserService;
 import com.example.smex_app_android.services.impl.UserServiceImpl;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import org.xmlpull.v1.XmlSerializer;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
         UserService userService = new UserServiceImpl(this);
         boolean startAppChecked = userService.checkerFirstStartApp();
+        
+
         if (startAppChecked) {
             bottomNavigationView = findViewById(R.id.bottom_navigation);
             getSupportFragmentManager().beginTransaction().replace(R.id.container, home).commit();
