@@ -32,7 +32,7 @@ public class KhoanThuProvider extends ContentProvider {
             context = Application.getInstance(); // get application context instead
         }
         dbHelper = new DataHelper(context, "KhoanThu",
-                new String[]{"maThuNhap", "moTa", "soTien"});
+                new String[]{"maThuNhap", "moTa", "soTien","ngayThu"});
         database = dbHelper.getWritableDatabase();
 
         // Check if the table exists and create it if it doesn't

@@ -340,7 +340,7 @@
             android:layout_marginBottom="100dp"
             android:background="@drawable/buton_radius"
             android:backgroundTint="#0189ff"
-            android:text="Thêm khoản chi"
+            android:text="Thêm khoản thu chi"
             android:textColor="@color/white" />
 
     </LinearLayout>

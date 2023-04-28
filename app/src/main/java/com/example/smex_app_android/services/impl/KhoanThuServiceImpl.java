@@ -29,9 +29,9 @@ public class KhoanThuServiceImpl implements KhoanThuService {
     @Override
     public boolean insert(KhoanThu obj) {
         ContentValues cv = new ContentValues();
-        cv.put("maThuNhap", obj.getMaThu());
         cv.put("moTa", obj.getMoTa());
         cv.put("soTien", obj.getSoTien());
+        cv.put("ngayThu", obj.getNgayThu());
         Uri uri = context.getContentResolver().insert(KhoanThuProvider.CONTENT_URI, cv);
         return (uri != null);
     }
