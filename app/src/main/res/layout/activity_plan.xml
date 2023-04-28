@@ -96,7 +96,7 @@
                 android:text="Trung bình chi/ngày" />
 
             <TextView
-                android:id="@+id/textView16"
+                android:id="@+id/avg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

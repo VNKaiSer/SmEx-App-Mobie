@@ -14,7 +14,9 @@ import androidx.fragment.app.Fragment;
 import com.example.adapter.AdapterPlan;
 import com.example.entity.Plan;
 import com.example.smex_app_android.R;
+import com.example.smex_app_android.services.KhoanChiService;
 import com.example.smex_app_android.services.UserService;
+import com.example.smex_app_android.services.impl.KhoanChiServiceImpl;
 import com.example.smex_app_android.services.impl.UserServiceImpl;
 
 import org.w3c.dom.Document;
@@ -24,6 +26,7 @@ import org.w3c.dom.NodeList;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -152,6 +155,13 @@ public class PlanFrg extends Fragment {
 
             }
         });
+
+        KhoanChiService khoanChiService = new KhoanChiServiceImpl(getContext());
+        Calendar calendar = Calendar.getInstance();
+        int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        TextView avg = view.findViewById(R.id.avg);
+        double avgMoney = khoanChiService.totalMoney();
+        avg.setText("$" + avgMoney / maxDay);
 
         return view;
     }

@@ -41,7 +41,6 @@ public class BarChartView extends View {
         mBarWidth = 64;
         mData = new int[]{1000, 1500, 2000, 2500, 3000, 2800, 2600, 2400, 2200, 2000, 1800, 1600};
         mLabels = new String[]{"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
-        mExpenses = new int[]{500, 750, 1000, 1250, 1500, 1400, 1300, 1200, 1100, 1000, 900, 800};
     }
 
     @Override
@@ -74,19 +73,9 @@ public class BarChartView extends View {
             int barTop = mPadding + (int) ((1 - (float) mData[i] / maxData) * barHeight);
             int barBottom = mHeight - mPadding * 2 - 32;
 
-            mPaint.setColor(Color.BLUE);
+            mPaint.setColor(Color.parseColor("#add8e6"));
             canvas.drawRect(barLeft, barTop, barRight, barBottom, mPaint);
-
-            // Draw expense bar
-            int expenseBarLeft = barLeft + mBarWidth / 4;
-            int expenseBarRight = barRight - mBarWidth / 4;
-            int expenseBarTop = mPadding + (int) ((1 - (float) mExpenses[i] / maxData) * barHeight);
-            int expenseBarBottom = mHeight - mPadding * 2 - 32;
-
-            mPaint.setColor(Color.RED);
-            canvas.drawRect(expenseBarLeft, expenseBarTop, expenseBarRight, expenseBarBottom, mPaint);
         }
-
         // Draw x-axis label
         mPaint.setColor(Color.BLACK);
         mPaint.setTextSize(24);
@@ -96,17 +85,10 @@ public class BarChartView extends View {
             canvas.drawText(mLabels[i], labelX, labelY, mPaint);
         }
 
-        mPaint.setColor(Color.BLUE);
-        canvas.drawRect(mPadding, mHeight - mPadding, mPadding + 32, mHeight - mPadding + 32, mPaint);
-        mPaint.setColor(Color.BLACK);
-        mPaint.setTextSize(24);
-        canvas.drawText("Thu", mPadding + 48, mHeight - mPadding + 24, mPaint);
 
-        mPaint.setColor(Color.RED);
-        canvas.drawRect(mPadding + 128, mHeight - mPadding, mPadding + 160, mHeight - mPadding + 32, mPaint);
-        mPaint.setColor(Color.BLACK);
-        canvas.drawText("Chi", mPadding + 176, mHeight - mPadding + 24, mPaint);
+
     }
+
 
     private int getMaxData() {
         int max = 0;

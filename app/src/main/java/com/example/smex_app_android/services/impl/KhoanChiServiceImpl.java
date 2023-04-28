@@ -138,4 +138,12 @@ public class KhoanChiServiceImpl implements KhoanChiService {
         }
         return data;
     }
+    @Override
+    public double totalMoney() {
+        double total = 0;
+        for (KhoanChi khoanChi : getAll()) {
+            total += khoanChi.getSoTien();
+        }
+        return total;
+    }
 }

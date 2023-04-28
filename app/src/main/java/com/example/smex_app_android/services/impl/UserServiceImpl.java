@@ -40,4 +40,5 @@ public class UserServiceImpl implements UserService {
     public boolean addMoney(int money) {
         return reposity.addMoney(money);
     }
+
 }

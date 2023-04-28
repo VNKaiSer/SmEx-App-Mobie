@@ -8,4 +8,5 @@ public interface KhoanChiService extends CRUDService<KhoanChi>{
     int totalMoneyUsed();
     boolean checkUsedMoneyThisDay();
     ArrayList<String> getKhoanChiStringByDay();
+    double totalMoney();
 }
