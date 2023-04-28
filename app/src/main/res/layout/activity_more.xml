@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -156,6 +154,7 @@
             android:textColor="#8E8E8E"
             android:textSize="20dp"
             android:textStyle="bold" />
+
 
         <TableLayout
             android:id="@+id/manager"
@@ -323,8 +322,17 @@
 
             />
 
+        <Button
+            android:id="@+id/chuyen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/manager"
+            android:layout_marginTop="50dp"
+            android:backgroundTint="@android:color/transparent"
+            android:background="@android:color/transparent"
+             />
         <ListView
-            android:id="@+id/listApp"
+            android:id="@+id/list_view_app"
             android:layout_width="match_parent"
             android:layout_height="390dp"
             android:layout_below="@id/manager"

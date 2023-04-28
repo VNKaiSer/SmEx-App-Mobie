@@ -43,10 +43,9 @@
         android:textStyle="bold"
         />
     <ListView
-        android:id="@+id/listApp"
+        android:id="@+id/list_app"
         android:layout_width="match_parent"
         android:layout_height="255dp"
-        android:layout_below="@id/manager"
         android:background="@drawable/shape" />
 
 </LinearLayout>

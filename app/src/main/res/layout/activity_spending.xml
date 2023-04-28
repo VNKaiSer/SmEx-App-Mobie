@@ -20,17 +20,19 @@
             android:background="@android:color/transparent"
             android:text="Hủy" />
 
-        <TextView
+        <Spinner
+            android:id="@+id/spinner"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:background="@drawable/bottom_home_content"
             android:backgroundTint="#65DBEC"
             android:gravity="center"
-            android:text="Chi tiêu"
-            android:textColor="#062B77"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:spinnerDropDownItemStyle="@style/SpinnerItemStyle"
+            android:spinnerMode="dropdown"
+            android:textColor="#062B77" />
+
 
         <Button
             android:id="@+id/btnThem"
@@ -171,7 +173,9 @@
             android:textSize="18sp" />
     </LinearLayout>
 
+
     <RelativeLayout
+        android:id="@+id/danhMuc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="20dp"
@@ -211,10 +215,10 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:horizontalSpacing="4dp"
+        android:isScrollContainer="false"
         android:numColumns="6"
         android:padding="16dp"
         android:stretchMode="columnWidth"
-        android:isScrollContainer="false"
         android:verticalSpacing="4dp" />
 
     <LinearLayout
@@ -234,18 +238,39 @@
             android:backgroundTint="#65DBEC"
             android:src="@drawable/baseline_attach_money_24" />
 
-
-        <TextView
-            android:id="@+id/time_text"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:background="@drawable/shape"
-            android:textAlignment="textEnd"
-            android:textColor="#0269BA"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:gravity="center"
+                android:textColor="#0269BA"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/time_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/shape"
+                android:gravity="center"
+                android:textColor="#0269BA"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
 
         <Button
